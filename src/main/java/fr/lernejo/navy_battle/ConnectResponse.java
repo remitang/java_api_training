@@ -5,15 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.util.Iterator;
 
-public class PostResponse implements HttpHandler {
+public class ConnectResponse implements HttpHandler {
+    public final Game game;
+    public final String port;
+
+    public ConnectResponse(Game game, String port) {
+        this.game = game;
+        this.port = port;
+    }
 
     public void sendResponse(HttpExchange exchange, String body, int rCode) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "application/json");
@@ -32,24 +34,12 @@ public class PostResponse implements HttpHandler {
             JsonNode url = data.path("url");
             JsonNode message = data.path("message");
             if (!id.isMissingNode() && !url.isMissingNode() && !message.isMissingNode()) {
-                System.out.println("id : " + data.path("id").asText());
-                System.out.println("url : " + data.path("url").asText());
-                System.out.println("message : " + data.path("message").asText());
-
-                sendResponse(exchange, "OK", 200);
+                String body = "{\n\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\",\n\"url\": \"http://localhost:" + this.port + "\",\n\"message\": \"May the best code win\"\n}";
+                sendResponse(exchange, body, 202);
+                this.game.play();
             } else {
                 sendResponse(exchange, "Bad Request", 400);
             }
-                //Staff staff = mapper.readValue(new File("Request.json"), Staff.class);
-            //Si ma méthode est post
-            // Lire mon fichier Json en local avec Jackson
-                // Déclarer object mapper => Fournir méthode ReadTree
-                    // Le stocker dans un objet de type JsonNode
-                // Déclarer objet type Iterator<String> myIterator = (Récupérer JsonNode)
-                    // Utiliser methode .fieldName sur mon iterator
-                    // Déclarer une liste et stocker tous les fieldName
-
-
         }
         else {
             sendResponse(exchange, "Not Found", 404);

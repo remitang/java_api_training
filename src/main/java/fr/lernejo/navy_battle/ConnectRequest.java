@@ -5,8 +5,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class PostRequest {
-    public PostRequest(int port, String adversaryUrl) {
+public class ConnectRequest {
+    public ConnectRequest(int port, String adversaryUrl) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest requestPost = HttpRequest.newBuilder()
             .uri(URI.create(adversaryUrl + "/api/game/start"))
