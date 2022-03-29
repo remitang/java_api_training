@@ -11,7 +11,7 @@ public class LauncherTest {
             () -> Launcher.main(new String[] { "123456789" })
         );
     }
-/*
+
     @Test
     public void StringForPort() {
         Assertions.assertThrows(
@@ -21,15 +21,8 @@ public class LauncherTest {
     }
 
     @Test
-    public void correctPort() {
-        Assertions.assertDoesNotThrow(
-            () -> Launcher.main(new String[] { Integer.toString(9876) })
-        );
-    }
-
-    @Test
     public void mainWithoutArgs() {
         Assertions.assertDoesNotThrow( () -> Launcher.main(new String[] {}));
     }
-    */
+
 }
