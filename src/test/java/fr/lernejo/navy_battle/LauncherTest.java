@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class LauncherTest {
 
-    private static int myPort = 9876;
+    private static int myPort = 7070;
 
     @AfterEach
     public void increment_testPort() {

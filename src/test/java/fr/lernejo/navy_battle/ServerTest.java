@@ -19,7 +19,7 @@ public class ServerTest {
 
     @BeforeEach
     void setupServer() throws IOException {
-        Server server = new Server("localhost", 9870);
+        Server server = new Server("localhost", 8080);
         server.createServer(game);
     }
 
@@ -27,7 +27,7 @@ public class ServerTest {
     public void testConnection()  {
         HttpResponse<String> response = null;
         HttpRequest requestGet = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:9870/ping"))
+            .uri(URI.create("http://localhost:8080/ping"))
             .setHeader("Accept", "application/json")
             .build();
         try {
