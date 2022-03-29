@@ -7,6 +7,7 @@ import java.net.http.HttpResponse;
 
 public class ConnectRequest {
     public ConnectRequest(int port, String adversaryUrl) {
+        System.out.println("API Connection Start");
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest requestPost = HttpRequest.newBuilder()
             .uri(URI.create(adversaryUrl + "/api/game/start"))
@@ -15,6 +16,8 @@ public class ConnectRequest {
             .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"hello\"}"))
             .build();
         client.sendAsync(requestPost, HttpResponse.BodyHandlers.ofString())
-            .thenAccept(resp -> System.out.println("Response: " + resp.statusCode() + " : " + resp.body()));
+            .thenApply(HttpResponse::body)
+            .thenAccept(System.out::println)
+            .join();
     }
 }

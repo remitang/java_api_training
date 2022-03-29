@@ -31,9 +31,9 @@ public class Game {
                     this.boatLife[i] = this.boatLife[i] - 1;
                     if (this.boatLife[i] == 0)
                         return "sunk";
-                }
-                else {
-                    return "hit";
+                    else {
+                        return "hit";
+                    }
                 }
             }
         }
@@ -64,11 +64,7 @@ public class Game {
 
     public void play() throws JsonProcessingException {
         String cell = this.nextAttack();
-        System.out.println("Attack the cell : " + cell);
-        //System.out.println("TEST1 User 1");
-
         PlayRequest fire = new PlayRequest(this.adversaryURL.get(0), cell);
-        //System.out.println("TEST2 User 1");
         JsonNode data = fire.fire();
         String consequence = data.path("consequence").asText();
         boolean shipLeft = data.path("shipLeft").asBoolean();

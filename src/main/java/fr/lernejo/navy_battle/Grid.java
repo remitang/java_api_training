@@ -65,14 +65,10 @@ public class Grid {
         for (int i = 0; i < 10; i++) {
             System.out.print((i+1) + " ");
             for (int j = 0; j < 10; j++) {
-                if (this.grid[i][j] == 0)
-                    System.out.print("X ");
-                else if (this.grid[i][j] == 1)
-                    System.out.print(". ");
-                else if (this.grid[i][j] == 2)
-                    System.out.print("* ");
-                else
-                    System.out.print("O ");
+                if (this.grid[i][j] == 0) System.out.print("* ");
+                else if (this.grid[i][j] == 1) System.out.print(". ");
+                else if (this.grid[i][j] == 2) System.out.print("X ");
+                else System.out.print("O ");
             }
             System.out.print("\n");
         }

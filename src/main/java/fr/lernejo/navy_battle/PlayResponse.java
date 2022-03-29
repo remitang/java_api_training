@@ -27,18 +27,13 @@ public class PlayResponse implements HttpHandler {
         if (exchange.getRequestMethod().equals("GET")) {
             String query = exchange.getRequestURI().getQuery();
             String target = query.split("=")[1];
-            //System.out.println("Query User 1 : " + target);
             String consequence = this.game.checkTarget(target);
             boolean shipLeft = this.game.checkShipLeft();
             String body = "{\n\"consequence\": \"" + consequence + "\",\n\"shipLeft\": " + shipLeft+ "\n}";
             sendResponse(exchange, body, 202);
-            if (shipLeft)
-                this.game.play();
-            else
-                System.out.println("You lost the game !");
+            if (shipLeft) this.game.play();
+            else System.out.println("You lost the game !");
         }
-        else {
-            sendResponse(exchange, "Not Found", 404);
-        }
+        else sendResponse(exchange, "Not Found", 404);
     }
 }

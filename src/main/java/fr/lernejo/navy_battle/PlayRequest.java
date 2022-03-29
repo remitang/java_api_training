@@ -24,20 +24,14 @@ public class PlayRequest {
             .uri(URI.create(this.adversaryUrl + "/api/game/fire?cell=" + this.cell))
             .setHeader("Accept", "application/json")
             .setHeader("Content-Type", "application/json")
-            .GET()
             .build();
-        try{
+        try {
             response = HttpClient.newHttpClient().send(requestGet, HttpResponse.BodyHandlers.ofString());
         }
         catch (Exception e) {
             System.err.println("Error in response of Fire request: " + e);
         }
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode data = mapper.readTree(response.body());
-        return data;
-        //System.out.println("id : " + data.path("id").asText());
-        //System.out.println("url : " + data.path("url").asText());
-        //System.out.println("message : " + data.path("message").asText());
-
+        return mapper.readTree(response.body());
     }
 }

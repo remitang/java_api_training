@@ -30,20 +30,15 @@ public class ConnectResponse implements HttpHandler {
         if (exchange.getRequestMethod().equals("POST")) {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode data = mapper.readTree(exchange.getRequestBody());
-            JsonNode id = data.path("id");
-            JsonNode url = data.path("url");
-            JsonNode message = data.path("message");
+            JsonNode id = data.path("id");JsonNode url = data.path("url");JsonNode message = data.path("message");
             if (!id.isMissingNode() && !url.isMissingNode() && !message.isMissingNode()) {
+                this.game.adversaryURL.add(data.path("url").asText());
                 String body = "{\n\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\",\n\"url\": \"http://localhost:" + this.port + "\",\n\"message\": \"May the best code win\"\n}";
                 sendResponse(exchange, body, 202);
                 this.game.play();
-            } else {
-                sendResponse(exchange, "Bad Request", 400);
-            }
+            } else sendResponse(exchange, "Bad Request", 400);
         }
-        else {
-            sendResponse(exchange, "Not Found", 404);
-        }
+        else sendResponse(exchange, "Not Found", 404);
         exchange.close();
     }
 }
