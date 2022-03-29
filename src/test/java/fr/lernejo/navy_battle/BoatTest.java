@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class BoatTest {
 
     @Test
-    public void bigIntPort() {
+    public void boatCoordinate() {
         int size = 1;
         String[] coordinate = {"A1"};
         Boat boat = new Boat(size, coordinate);
